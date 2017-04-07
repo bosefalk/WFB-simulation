@@ -1,21 +1,4 @@
 Combat Round 1
 Number of Orc: 20
 Number of Dwarf: 15
-Simultaneous attacks
-Orc I: 3 vs Dwarf I: 3
-Dwarf attacks 
-Attacks: 15
-Hits: 9 (4+)
-Wounds: 4 (4+)
-Saves: 0 (6+)
-Final Wounds: 4
-Orc attacks 
-Attacks: 20
-Hits: 12 (4+)
-Wounds: 9 (3+)
-Saves: 2 (5+)
-Final Wounds: 7
-Remaining Orc: 16
-Remaining Dwarf: 8
-Combat Score: Orc 7 vs Dwarf 4
-Dwarf lost the round by 3
+
