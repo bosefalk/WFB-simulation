@@ -1,4 +1,0 @@
-Combat Round 1
-Number of Orc: 20
-Number of Dwarf: 15
-
