@@ -37,8 +37,8 @@ def cc_attack(attacker, defender, log = None):
 
 # Temp class for returning both roll and pass / fail result of leadership tests
 class Return_cc_round(object):
-  def __init__(self, loser, combat_continues):
-     self.loser = loser
+  def __init__(self, winner, combat_continues):
+     self.winner = winner
      self.combat_continues = combat_continues
 
 # Calculate a round of close combat, and update the input Unit objects with remaining number of models
@@ -61,14 +61,14 @@ def cc_round(unit1, unit2, log):
         unit2.models = unit2.models - to_remove_unit2
         log.write("Remaining " + str(unit2.name) + ": " + str(unit2.models) + '\n')
         if unit2.models <= 0:
-            return Return_cc_round(loser = unit2, combat_continues = False)
+            return Return_cc_round(winner = unit1, combat_continues = False)
 
         log.write(str(unit2.name) + " attacks " + '\n')
         to_remove_unit1 = cc_attack(attacker = unit2, defender = unit1, log = log)
         unit1.models = unit1.models - to_remove_unit1
         log.write("Remaining " + str(unit1.name) + ": " + str(unit1.models) + '\n')
         if unit1.models <= 0:
-            return Return_cc_round(loser = unit1, combat_continues = False)
+            return Return_cc_round(winner = unit2, combat_continues = False)
 
 
     if unit1.I < unit2.I:
@@ -80,14 +80,14 @@ def cc_round(unit1, unit2, log):
         unit1.models = unit1.models - to_remove_unit1
         log.write("Remaining " + str(unit1.name) + ": " + str(unit1.models) + '\n')
         if unit1.models <= 0:
-            return Return_cc_round(loser = unit1, combat_continues = False)
+            return Return_cc_round(winner = unit2, combat_continues = False)
 
         log.write(str(unit1.name) + "attacks" + '\n')
         to_remove_unit2 = cc_attack(attacker = unit1, defender = unit2, log = log)
         unit2.models = unit2.models - to_remove_unit2
         log.write("Remaining " + str(unit2.name) + ": " + str(unit2.models) + '\n')
         if unit2.models <= 0:
-            return Return_cc_round(loser = unit2, combat_continues = False)
+            return Return_cc_round(winner = unit1, combat_continues = False)
 
 
     if unit1.I == unit2.I:
@@ -108,11 +108,11 @@ def cc_round(unit1, unit2, log):
         log.write("Remaining " + str(unit2.name) + ": " + str(unit2.models) + '\n')
 
         if unit2.models <= 0 & unit1.models > 0:
-            return Return_cc_round(loser = unit2, combat_continues=False)
+            return Return_cc_round(winner = unit1, combat_continues=False)
         if unit1.models <= 0 & unit2.models > 0:
-            return Return_cc_round(loser=unit1, combat_continues=False)
+            return Return_cc_round(winner=unit2, combat_continues=False)
         if unit2.models <= 0 & unit1.models <= 0:
-            return Return_cc_round(loser=None, combat_continues=False)
+            return Return_cc_round(winner=None, combat_continues=False)
 
     # Break test
     adj_w_unit1 = to_remove_unit2
@@ -122,18 +122,20 @@ def cc_round(unit1, unit2, log):
 
     if adj_w_unit1 > adj_w_unit2:
         loser = unit2
+        winner = unit1
         loser_diff = adj_w_unit1 - adj_w_unit2
         log.write(str(unit2.name) + " lost the round by " + str(loser_diff) + '\n')
 
     if adj_w_unit1 < adj_w_unit2:
         loser = unit1
+        winner = unit2
         loser_diff = adj_w_unit2 - adj_w_unit1
         log.write(str(unit1.name) + " lost the round by " + str(loser_diff) + '\n')
 
     if adj_w_unit1 == adj_w_unit2:
         log.write("Round was a draw" + '\n')
         combat_continues = True
-        return Return_cc_round(loser = None, combat_continues = True)
+        return Return_cc_round(winner = None, combat_continues = True)
 
     break_value = loser.Ld - loser_diff
     break_result = ld_test(break_value)
@@ -150,14 +152,14 @@ def cc_round(unit1, unit2, log):
     log.write("Combat Round ends" + '\n')
 
 
-    return Return_cc_round(loser = loser, combat_continues = combat_continues)
+    return Return_cc_round(winner = winner, combat_continues = combat_continues)
 
 
 
 # Temp class for returning overall loser and number of rounds of fighting
 class Return_close_combat(object):
-  def __init__(self, loser, round):
-     self.loser = loser
+  def __init__(self, winner, round):
+     self.winner = winner
      self.round = round
 
 # Continues the combat by iterating cc_round until one units fails a break test or is wiped out
@@ -177,17 +179,17 @@ def close_combat(unit1, unit2):
         cont = cc_result.combat_continues
 
 
-    loser = cc_result.loser
+    winner = cc_result.winner
 
-    if loser == None:
+    if winner == None:
         log.write("Both units were wiped out")
         log.close
-        return Return_close_combat(loser = None, round = round)
+        return Return_close_combat(winner = None, round = round)
 
-    log.write(str(loser.name) + " lost the battle")
+    log.write(str(winner.name) + " won the battle")
     log.close
 
-    return Return_close_combat(loser = loser, round = round)
+    return Return_close_combat(winner = winner, round = round)
 
 
 
