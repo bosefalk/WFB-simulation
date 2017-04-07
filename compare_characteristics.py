@@ -5,13 +5,13 @@ def to_hit(WS_att, WS_def):
     diff = WS_att - WS_def
     if diff > 0:
         success_roll = 3
-        return success_roll;
-    if WS_def > 2 * WS_att:
+        return success_roll
+    if WS_def > (2 * WS_att):
         success_roll = 5
-        return success_roll;
+        return success_roll
     else:
         success_roll = 4
-        return success_roll;
+        return success_roll
 
 
 def to_wound(S_att, T_def):

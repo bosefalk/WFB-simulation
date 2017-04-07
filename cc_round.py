@@ -107,11 +107,11 @@ def cc_round(unit1, unit2, log):
         unit2.models = unit2.models - to_remove_unit2
         log.write("Remaining " + str(unit2.name) + ": " + str(unit2.models) + '\n')
 
-        if unit2.models <= 0 & unit1.models > 0:
+        if unit2.models <= 0 and unit1.models > 0:
             return Return_cc_round(winner = unit1, combat_continues=False)
-        if unit1.models <= 0 & unit2.models > 0:
+        if unit1.models <= 0 and unit2.models > 0:
             return Return_cc_round(winner=unit2, combat_continues=False)
-        if unit2.models <= 0 & unit1.models <= 0:
+        if unit2.models <= 0 and unit1.models <= 0:
             return Return_cc_round(winner=None, combat_continues=False)
 
     # Break test
