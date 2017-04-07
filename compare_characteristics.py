@@ -27,12 +27,10 @@ def to_wound(S_att, T_def):
     if diff == -1:
         success_roll = 5
         return success_roll;
-    if diff == -2 or diff == -3:
+    if diff <= -2:
         success_roll = 6
         return success_roll;
-    if diff <= -3:
-        success_roll = 7
-        return success_roll;
+
 
 def armour_save(S_att, save):
     # Armour save is lowered (higher roll needed to save) by every point S > 3
