@@ -7,6 +7,13 @@ from cc_round import *
 loser_list = []
 no_rounds = []
 
+class Return_wfb_simulation:
+	 def __init__(self, loser, round, unit1_copy, unit2_copy):
+     self.loser = loser
+     self.round = round
+	 self.unit1_copy
+	 self.unit2_copy
+
 # Run simulations - at the top need to initialize the Unit objects
 for i in range(0, 300):
     orc = Unit(name="Goblin", models=35, WS=2, S=3, T=3, I=2, Sv=6, Ld=7)
