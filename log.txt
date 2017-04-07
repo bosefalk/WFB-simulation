@@ -1,4 +1,53 @@
 Combat Round 1
+Combat Round Starts
 Number of Orc: 20
-Number of Dwarf: 15
-
+Number of Dwarf: 20
+Orc attacks first
+Orc I: 3 vs Dwarf I: 2
+Orc attacks 
+Attacks: 20
+Hits: 11 (4+)
+Wounds: 4 (4+)
+Saves: 1 (5+)
+Final Wounds: 3
+Remaining Dwarf: 17
+Dwarf attacks 
+Attacks: 17
+Hits: 3 (4+)
+Wounds: 2 (4+)
+Saves: 0 (6+)
+Final Wounds: 2
+Remaining Orc: 18
+Combat Score: Orc 3 vs Dwarf 2
+Dwarf lost the round by 1
+Dwarf break test against modified Ld 7
+Roll: 5
+Break test result: Pass
+Combat Round ends
+Combat Round 2
+Combat Round Starts
+Number of Orc: 18
+Number of Dwarf: 17
+Orc attacks first
+Orc I: 3 vs Dwarf I: 2
+Orc attacks 
+Attacks: 18
+Hits: 3 (4+)
+Wounds: 2 (4+)
+Saves: 1 (5+)
+Final Wounds: 1
+Remaining Dwarf: 16
+Dwarf attacks 
+Attacks: 16
+Hits: 11 (4+)
+Wounds: 7 (4+)
+Saves: 2 (6+)
+Final Wounds: 5
+Remaining Orc: 13
+Combat Score: Orc 1 vs Dwarf 5
+Orc lost the round by 4
+Orc break test against modified Ld 3
+Roll: 9
+Break test result: Fail
+Combat Round ends
+Orc lost the battle
