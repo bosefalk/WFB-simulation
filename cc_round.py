@@ -116,7 +116,12 @@ def cc_round(unit1, unit2, log):
 
     # Break test
     adj_w_unit1 = to_remove_unit2
+	if unit1.standard == True:
+		adj_w_uni1 = adj_w_unit1 + 1
+	
     adj_w_unit2 = to_remove_unit1
+	if unit2.standard == True:
+		adj_w_uni2 = adj_w_unit2 + 1
 
     log.write("Combat Score: " + str(unit1.name) + " " + str(adj_w_unit1) + " vs " + str(unit2.name) + " " + str(adj_w_unit2) + '\n')
 

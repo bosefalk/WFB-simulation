@@ -5,7 +5,7 @@
 
 class Unit:
 
-    def __init__(self, name, models, WS, S, T, I, Sv, Ld):
+    def __init__(self, name, models, WS, S, T, I, Sv, Ld, standard):
         self.name = name
         self.models = models
         self.WS = WS
@@ -14,4 +14,5 @@ class Unit:
         self.I = I
         self.Sv = Sv
         self.Ld = Ld
+		self.standard = standard
 
