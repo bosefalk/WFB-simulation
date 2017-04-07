@@ -11,8 +11,11 @@ Simulates a Warhammer Fantasy close combat battle between two user-defined units
 To run several simulations of a battle between two units, in python console first import wfb_simulation, then define the the Units and run the simulation function:
 
 from wfb_simulation import *
+
 orc = Unit(name="Orc", models=20, WS=3, S=4, T=3, I=3, Sv=6, Ld=7)
+
 dwarf = Unit(name="Dwarf", models=20, WS=3, S=3, T=4, I=2, Sv=4, Ld=8)
+
 wfb_simulation(orc, dwarf, runs = 20, filename = "dwarf_vs_orc")
 
 The results of each simulated battle is a row printed in the dwarf_vs_orc.csv file (default name is results.csv if filename is blank), with details on who won, how many rounds it took, and the final units sizes at the battle end.
