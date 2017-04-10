@@ -4,15 +4,15 @@
 # Then you can use orc.WS for their weapon skill etc
 
 class Unit:
-
-	def __init__(self, name, models, WS, S, T, I, Sv, Ld, standard = False):
-		self.name = name
-		self.models = models
-		self.WS = WS
-		self.S = S
-		self.T = T
-		self.I = I
-		self.Sv = Sv
-		self.Ld = Ld
-		self.standard = standard
-
+    def __init__(self, name, models, WS, S, T, I, Sv, Ld,
+                 standard=False, charge=False):
+        self.name = name
+        self.models = models
+        self.WS = WS
+        self.S = S
+        self.T = T
+        self.I = I
+        self.Sv = Sv
+        self.Ld = Ld
+        self.standard = standard
+        self.charge = charge

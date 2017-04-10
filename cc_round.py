@@ -37,12 +37,12 @@ def cc_attack(attacker, defender, log = None):
 
 # Temp class for returning both roll and pass / fail result of leadership tests
 class Return_cc_round(object):
-    def __init__(self, winner, combat_continues):
-        self.winner = winner
-        self.combat_continues = combat_continues
+	def __init__(self, winner, combat_continues):
+		self.winner = winner
+		self.combat_continues = combat_continues
 
 # Calculate a round of close combat, and update the input Unit objects with remaining number of models
-def cc_round(unit1, unit2, log):
+def cc_round(unit1, unit2, log, round = 1):
 
 	# Write output to log.txt (and pass this open connection to cc_attack)
 
@@ -123,7 +123,15 @@ def cc_round(unit1, unit2, log):
 	adj_w_unit2 = to_remove_unit1
 	if unit2.standard == True:
 		log.write(str(unit2.name) + " has Standard" + '\n')
-		adj_w_uni2 = adj_w_unit2 + 1
+		adj_w_unit2 = adj_w_unit2 + 1
+
+	if unit1.charge == True and round == 1:
+		log.write(str(unit1.name) + " charged" + '\n')
+		adj_w_unit1 = adj_w_unit1 + 1
+
+	if unit2.charge == True and round == 1:
+		log.write(str(unit2.name) + " charged" + '\n')
+		adj_w_unit2 = adj_w_unit2 + 1
 
 	log.write("Combat Score: " + str(unit1.name) + " " + str(adj_w_unit1) + " vs " + str(unit2.name) + " " + str(adj_w_unit2) + '\n')
 
@@ -165,9 +173,9 @@ def cc_round(unit1, unit2, log):
 
 # Temp class for returning overall loser and number of rounds of fighting
 class Return_close_combat(object):
-    def __init__(self, winner, round):
-        self.winner = winner
-        self.round = round
+	def __init__(self, winner, round):
+		self.winner = winner
+		self.round = round
 
 # Continues the combat by iterating cc_round until one units fails a break test or is wiped out
 def close_combat(unit1, unit2):
@@ -181,7 +189,7 @@ def close_combat(unit1, unit2):
 		round = round + 1
 		log.write("Combat Round " + str(round) + '\n')
 
-		cc_result = cc_round(unit1, unit2, log = log)
+		cc_result = cc_round(unit1, unit2, log = log, round = round)
 
 		cont = cc_result.combat_continues
 
