@@ -39,4 +39,8 @@ def armour_save(S_att, save):
     if lower < 0:
         lower = 0
     success_roll = save + lower
+
+    if success_roll < 2
+        success_roll = 2
+        
     return success_roll;
