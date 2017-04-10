@@ -5,14 +5,14 @@
 
 class Unit:
 
-    def __init__(self, name, models, WS, S, T, I, Sv, Ld, standard):
-        self.name = name
-        self.models = models
-        self.WS = WS
-        self.S = S
-        self.T = T
-        self.I = I
-        self.Sv = Sv
-        self.Ld = Ld
+	def __init__(self, name, models, WS, S, T, I, Sv, Ld, standard = False):
+		self.name = name
+		self.models = models
+		self.WS = WS
+		self.S = S
+		self.T = T
+		self.I = I
+		self.Sv = Sv
+		self.Ld = Ld
 		self.standard = standard
 
