@@ -2,3 +2,4 @@ __pycache__
 .idea
 log.txt
 *.csv
+roll_dice.pyc
