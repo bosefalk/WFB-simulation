@@ -1,5 +1,6 @@
 from roll_dice import *
 from compare_characteristics import *
+from combat_resolution import *
 
 # Calculate number of wounds taken by the defender
 def cc_attack(attacker, defender, log = None):
@@ -115,47 +116,16 @@ def cc_round(unit1, unit2, log, round = 1):
 			return Return_cc_round(winner=None, combat_continues=False)
 
 	# Break test
-	adj_w_unit1 = to_remove_unit2
-	if unit1.standard == True:
-		log.write(str(unit1.name) + " has Standard" + '\n')
-		adj_w_unit1 = adj_w_unit1 + 1
-	
-	adj_w_unit2 = to_remove_unit1
-	if unit2.standard == True:
-		log.write(str(unit2.name) + " has Standard" + '\n')
-		adj_w_unit2 = adj_w_unit2 + 1
 
-	if unit1.charge == True and round == 1:
-		log.write(str(unit1.name) + " charged" + '\n')
-		adj_w_unit1 = adj_w_unit1 + 1
+	combat_score = combat_resolution(unit1, unit2, to_remove_unit1, to_remove_unit2, log = log, round = round)
 
-	if unit2.charge == True and round == 1:
-		log.write(str(unit2.name) + " charged" + '\n')
-		adj_w_unit2 = adj_w_unit2 + 1
+	if combat_score.winner == None:
+		return Return_cc_round(winner=None, combat_continues=True)
 
-	log.write("Combat Score: " + str(unit1.name) + " " + str(adj_w_unit1) + " vs " + str(unit2.name) + " " + str(adj_w_unit2) + '\n')
-
-	if adj_w_unit1 > adj_w_unit2:
-		loser = unit2
-		winner = unit1
-		loser_diff = adj_w_unit1 - adj_w_unit2
-		log.write(str(unit2.name) + " lost the round by " + str(loser_diff) + '\n')
-
-	if adj_w_unit1 < adj_w_unit2:
-		loser = unit1
-		winner = unit2
-		loser_diff = adj_w_unit2 - adj_w_unit1
-		log.write(str(unit1.name) + " lost the round by " + str(loser_diff) + '\n')
-
-	if adj_w_unit1 == adj_w_unit2:
-		log.write("Round was a draw" + '\n')
-		combat_continues = True
-		return Return_cc_round(winner = None, combat_continues = True)
-
-	break_value = loser.Ld - loser_diff
+	break_value = combat_score.loser.Ld - combat_score.loser_diff
 	break_result = ld_test(break_value)
 
-	log.write(str(loser.name) + " break test against modified Ld " + str(break_value) + '\n')
+	log.write(str(combat_score.loser.name) + " break test against modified Ld " + str(break_value) + '\n')
 	log.write("Roll: " + str(break_result.roll) + '\n')
 	log.write("Break test result: " + break_result.result + '\n')
 
@@ -167,7 +137,7 @@ def cc_round(unit1, unit2, log, round = 1):
 	log.write("Combat Round ends" + '\n')
 
 
-	return Return_cc_round(winner = winner, combat_continues = combat_continues)
+	return Return_cc_round(winner = combat_score.winner, combat_continues = combat_continues)
 
 
 
