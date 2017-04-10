@@ -38,7 +38,7 @@ def ld_test(ld_value):
 
     roll = roll_results[0]
 
-    if roll <= ld_value:
+    if roll <= ld_value or roll == 2:
         result = "Pass"
     else:
         result = "Fail"

@@ -47,11 +47,18 @@ class ld_roll_test(unittest.TestCase):
         self.assertTrue(type(out.roll) == int)
 
     def test_seed1(self):
-        # Expects pass result with a roll of
+        # Expects pass result with set seed
         random.seed(578)
         out = ld_test(7)
         self.assertEqual(out.result, "Pass")
         self.assertEqual(out.roll, 5)
+
+    def test_result_is_2(self):
+        # With random.seed(2), the rolls should be 2, check it passes even with lower Ld
+        random.seed(2)
+        out = ld_test(-2)
+        self.assertTrue(out.result == "Pass")
+        self.assertTrue(out.roll == 2)
 
 
 # Unit tests for compare characteristics
