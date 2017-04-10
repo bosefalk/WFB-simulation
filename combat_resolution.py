@@ -44,10 +44,34 @@ def combat_resolution(unit1, unit2, to_remove_unit1, to_remove_unit2, log, round
         log.write(str(unit1.name) + " lost the round by " + str(loser_diff) + '\n')
 
     if unit1_score == unit2_score:
-        log.write("Round was a draw" + '\n')
-        return Return_combat_resolution(unit1_score = unit1_score,
+        if unit1.musician == True:
+            log.write(str(unit1.name) + " has musician" + '\n')
+        if unit2.musician == True:
+            log.write(str(unit2.name) + " has musician" + '\n')
+
+        if unit1.musician == False and unit2.musician == False:
+
+            log.write("Round was a draw" + '\n')
+            return Return_combat_resolution(unit1_score = unit1_score,
                                        unit2_score = unit1_score,
                                        loser = None, winner=None, loser_diff = 0)
+
+        if unit1.musician == True and unit2.musician == True:
+            log.write("Round was a draw" + '\n')
+            return Return_combat_resolution(unit1_score=unit1_score,
+                                            unit2_score=unit1_score,
+                                            loser=None, winner=None, loser_diff=0)
+
+        if unit1.musician == True and unit2.musician == False:
+            loser = unit2
+            winner = unit1
+            loser_diff = 0
+
+        if unit1.musician == False and unit2.musician == True:
+            loser = unit1
+            winner = unit2
+            loser_diff = 0
+
 
 
     return Return_combat_resolution(unit1_score = unit1_score, unit2_score = unit2_score,
