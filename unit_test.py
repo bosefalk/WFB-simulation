@@ -2,6 +2,7 @@ import unittest
 from roll_dice import *
 import random
 from statistics import mean
+from compare_characteristics import *
 
 
 # Tests for roll_dice
@@ -9,7 +10,7 @@ from statistics import mean
 class roll_dice_test(unittest.TestCase):
     def test_return_int(self):
         # Should return an integer
-        out = roll_dice(10, 4)
+        out = roll_dice(random.randint(0, 100), random.randint(0, 10))
         self.assertTrue(type(out) == int)
 
     def test_seed1(self):
@@ -41,7 +42,7 @@ class roll_dice_test(unittest.TestCase):
 class ld_roll_test(unittest.TestCase):
     def test_return_int(self):
         # Roll return should be integer, result should be string
-        out = ld_test(7)
+        out = ld_test(random.randint(0, 20))
         self.assertTrue(type(out.result) == str)
         self.assertTrue(type(out.roll) == int)
 
@@ -53,7 +54,64 @@ class ld_roll_test(unittest.TestCase):
         self.assertEqual(out.roll, 5)
 
 
+# Unit tests for compare characteristics
 
+
+class to_hit_test(unittest.TestCase):
+
+    def test_return_int(self):
+        # Should return an integer between 3 and 5, given any inputs between 1 and 9
+        out = to_hit(random.randint(1, 9), random.randint(1,9))
+        self.assertTrue(type(out) == int)
+        self.assertTrue(3 <= out <= 5)
+
+    # A couple of spotchecks making sure the to-hit calculations are correct
+    def test_spot_checks(self):
+        self.assertEqual(to_hit(3, 3), 4)
+        self.assertEqual(to_hit(4, 3), 3)
+        self.assertEqual(to_hit(3, 4), 4)
+        self.assertEqual(to_hit(3, 5), 4)
+        self.assertEqual(to_hit(3, 6), 4)
+        self.assertEqual(to_hit(3, 7), 5)
+        self.assertEqual(to_hit(2, 4), 4)
+        self.assertEqual(to_hit(2, 5), 5)
+        self.assertEqual(to_hit(5, 2), 3)
+        self.assertEqual(to_hit(3, 2), 3)
+        self.assertEqual(to_hit(4, 2), 3)
+
+
+class to_wound_test(unittest.TestCase):
+
+    def test_return_int(self):
+        # Should return integer between 2 and 6 given random inputs (between 1 and 9)
+        out = to_wound(random.randint(1,9), random.randint(1, 9))
+        self.assertTrue(type(out) == int)
+        self.assertTrue(2 <= out <= 6)
+
+    # Spotchecks for a few common combinations
+    def test_spot_checks(self):
+        self.assertEqual(to_wound(3, 3), 4)
+        self.assertEqual(to_wound(4, 3), 3)
+        self.assertEqual(to_wound(3, 4), 5)
+        self.assertEqual(to_wound(5, 3), 2)
+        self.assertEqual(to_wound(3, 5), 6)
+        self.assertEqual(to_wound(6, 3), 2)
+        self.assertEqual(to_wound(3, 6), 6)
+        self.assertEqual(to_wound(7, 3), 2)
+        self.assertEqual(to_wound(3, 7), 6)
+        self.assertEqual(to_wound(8, 3), 2)
+        self.assertEqual(to_wound(3, 8), 6)
+        self.assertEqual(to_wound(2, 3), 5)
+        self.assertEqual(to_wound(4, 2), 2)
+
+class armour_save_test(unittest.TestCase):
+
+    def test_return_int(self):
+        # Should return integer equal to or larger than 2 for any input value
+        out = armour_save(random.randint(0, 10), random.randint(0, 10))
+        self.assertTrue(type(out) == int)
+        self.assertTrue(out > 2)
+        
 
 if __name__ == '__main__':
     unittest.main()
