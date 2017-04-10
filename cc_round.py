@@ -1,9 +1,10 @@
 from roll_dice import *
 from compare_characteristics import *
 from combat_resolution import *
+from special_rules import *
 
 # Calculate number of wounds taken by the defender
-def cc_attack(attacker, defender, log = None):
+def cc_attack(attacker, defender, log = None, round = 1):
 	# attacker and defender are Unit class objects
 	# log is optional logging text file
 
@@ -12,13 +13,15 @@ def cc_attack(attacker, defender, log = None):
 	# Defender rolls how many wounds are saved
 	# Final return is total number of wounds taken by the defender
 
-	to_hit_value = to_hit(attacker.WS, defender.WS)
-	hits = roll_dice(attacker.models, to_hit_value)
+	s = special_rules(attacker, defender, log = log, round = round)
 
-	to_wound_value = to_wound(attacker.S, defender.T)
+	to_hit_value = to_hit(s.attacker.WS, s.defender.WS)
+	hits = roll_dice(s.attacker.models, to_hit_value)
+
+	to_wound_value = to_wound(s.attacker.S, s.defender.T)
 	wounds = roll_dice(hits, to_wound_value)
 
-	save_value = armour_save(attacker.S, defender.Sv)
+	save_value = armour_save(s.attacker.S, s.defender.Sv)
 	saves = roll_dice(wounds, save_value)
 
 	wounds_final = wounds - saves
@@ -58,14 +61,14 @@ def cc_round(unit1, unit2, log, round = 1):
 		log.write(str(unit1.name) + " I: " + str(unit1.I) + " vs " + str(unit2.name) + " I: " + str(unit2.I) + '\n')
 
 		log.write(str(unit1.name) + " attacks " + '\n')
-		to_remove_unit2 = cc_attack(attacker = unit1, defender = unit2, log = log)
+		to_remove_unit2 = cc_attack(attacker = unit1, defender = unit2, log = log, round = round)
 		unit2.models = unit2.models - to_remove_unit2
 		log.write("Remaining " + str(unit2.name) + ": " + str(unit2.models) + '\n')
 		if unit2.models <= 0:
 			return Return_cc_round(winner = unit1, combat_continues = False)
 
 		log.write(str(unit2.name) + " attacks " + '\n')
-		to_remove_unit1 = cc_attack(attacker = unit2, defender = unit1, log = log)
+		to_remove_unit1 = cc_attack(attacker = unit2, defender = unit1, log = log, round = round)
 		unit1.models = unit1.models - to_remove_unit1
 		log.write("Remaining " + str(unit1.name) + ": " + str(unit1.models) + '\n')
 		if unit1.models <= 0:
@@ -77,14 +80,14 @@ def cc_round(unit1, unit2, log, round = 1):
 		log.write(str(unit1.name) + " I: " + str(unit1.I) + " vs " + str(unit2.name) + " I: " + str(unit2.I) + '\n')
 
 		log.write(str(unit2.name) + " attacks " + '\n')
-		to_remove_unit1 = cc_attack(attacker = unit2, defender = unit1, log = log)
+		to_remove_unit1 = cc_attack(attacker = unit2, defender = unit1, log = log, round = round)
 		unit1.models = unit1.models - to_remove_unit1
 		log.write("Remaining " + str(unit1.name) + ": " + str(unit1.models) + '\n')
 		if unit1.models <= 0:
 			return Return_cc_round(winner = unit2, combat_continues = False)
 
 		log.write(str(unit1.name) + "attacks" + '\n')
-		to_remove_unit2 = cc_attack(attacker = unit1, defender = unit2, log = log)
+		to_remove_unit2 = cc_attack(attacker = unit1, defender = unit2, log = log, round = round)
 		unit2.models = unit2.models - to_remove_unit2
 		log.write("Remaining " + str(unit2.name) + ": " + str(unit2.models) + '\n')
 		if unit2.models <= 0:
@@ -96,10 +99,10 @@ def cc_round(unit1, unit2, log, round = 1):
 		log.write(str(unit1.name) + " I: " + str(unit1.I) + " vs " + str(unit2.name) + " I: " + str(unit2.I) + '\n')
 
 		log.write(str(unit2.name) + " attacks " + '\n')
-		to_remove_unit1 = cc_attack(attacker = unit2, defender = unit1, log = log)
+		to_remove_unit1 = cc_attack(attacker = unit2, defender = unit1, log = log, round = round)
 
 		log.write(str(unit1.name) + " attacks " + '\n')
-		to_remove_unit2 = cc_attack(attacker = unit1, defender = unit2, log = log)
+		to_remove_unit2 = cc_attack(attacker = unit1, defender = unit2, log = log, round = round)
 
 
 		unit1.models = unit1.models - to_remove_unit1

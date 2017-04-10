@@ -5,7 +5,8 @@
 
 class Unit:
     def __init__(self, name, models, WS, S, T, I, Sv, Ld,
-                 standard=False, musician = False, charge=False):
+                 standard=False, musician = False, charge=False,
+                 choppas = False):
         self.name = name
         self.models = models
         self.WS = WS
@@ -17,3 +18,4 @@ class Unit:
         self.standard = standard
         self.musician = musician
         self.charge = charge
+        self.choppas = choppas
