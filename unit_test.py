@@ -107,10 +107,26 @@ class to_wound_test(unittest.TestCase):
 class armour_save_test(unittest.TestCase):
 
     def test_return_int(self):
-        # Should return integer equal to or larger than 2 for any input value
+        # Should return integer for any input value
         out = armour_save(random.randint(0, 10), random.randint(0, 10))
         self.assertTrue(type(out) == int)
-        self.assertTrue(out > 2)
+
+    def test_less_than_2(self):
+        # Check that if save is less than 2, a 2+ roll is still returned
+        out = armour_save(3, 1)
+        self.assertTrue(out >= 2)
+
+    def test_spot_checks(self):
+        # A couple of spot checks on common combinations
+        self.assertEqual(armour_save(3, 5), 5)
+        self.assertEqual(armour_save(4, 5), 6)
+        self.assertEqual(armour_save(5, 5), 7)
+        self.assertEqual(armour_save(2, 4), 4)
+        self.assertEqual(armour_save(4, 2), 3)
+        self.assertEqual(armour_save(5, 2), 4)
+        self.assertEqual(armour_save(4, 1), 2)
+        self.assertEqual(armour_save(4, -1), 2)
+        self.assertEqual(armour_save(7, -1), 3)
         
 
 if __name__ == '__main__':
