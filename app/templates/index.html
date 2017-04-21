@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>WFB-simulation</title>
+  </head>
+  <body>
+      <form action="", method="post">
+        <p>
+          Name: {{ form.name }}
+          {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+        </p>
+
+        <p>
+          Strength: {{ form.S }}
+          {% for error in form.S.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+        </p>
+        <p><input type="submit", value="Simulate", name = "result"></p>
+
+      </form>
+
+
+  </body>
+</html>
