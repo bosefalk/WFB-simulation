@@ -1,0 +1,29 @@
+
+Clone repository to server
+some instructions here: https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04
+
+create virtual environment: http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/
+
+virtualenv -p /usr/bin/python3.5 wfb-env
+source wfb-env/bin/activate
+
+Install packages
+
+pip install -r requirements.txt
+
+
+Verify that the app runs by itself on port 5000
+
+cd WFB-simulation
+python3 run_app.py
+
+
+Verify gunicorn can bind and launch the app on port 8000
+
+gunicorn run_app:app --bind 0.0.0.0:8000
+
+
+Move the wfb_init.config file to /etc/init/:
+
+mv wfb_init.config /etc/init
+
