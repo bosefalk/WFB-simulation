@@ -28,16 +28,22 @@ def wfb_simulation(unit1, unit2, runs, filename = 'results'):
 
             # If both units were wiped out (only possible if they same the same I), record that Both lost
             if c_result.winner == None:
-                outcome = Return_wfb_simulation(winner = "Both", round = c_result.round,
+                outcome = Return_wfb_simulation(winner = "Both_wiped", round = c_result.round,
                                                 unit1_size = unit1_copy.models,
                                                 unit2_size = unit2_copy.models)
+
+                outputwriter.writerow([outcome.winner, outcome.round,
+                                       outcome.unit1_size, outcome.unit2_size])
+
+                continue
             else:
                 outcome = Return_wfb_simulation(winner=c_result.winner, round=c_result.round,
                                                 unit1_size=unit1_copy.models,
                                                 unit2_size=unit2_copy.models)
 
-            outputwriter.writerow([outcome.winner.name, outcome.round,
-                                  outcome.unit1_size, outcome.unit2_size])
+                outputwriter.writerow([outcome.winner.name, outcome.round,
+                                      outcome.unit1_size, outcome.unit2_size])
+                continue
 
 
     print("Finished, results printed in " + filename + ".csv")
