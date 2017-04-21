@@ -3,24 +3,51 @@
     <title>WFB-simulation</title>
   </head>
   <body>
-      <form action="/result", method="post">
+      <form action="", method = "post">
+
+        {{ form.hidden_tag() }}
+        <h1>Unit 1</h1>
         <p>
-          Name: {{ form.name }}
-          {% for error in form.name.errors %}
+          Name: {{ form.name1 }}
+          {% for error in form.name1.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
         </p>
 
         <p>
-          Strength: {{ form.S }}
-          {% for error in form.S.errors %}
+          Strength: {{ form.S1 }}
+          {% for error in form.S1.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
         </p>
-        <p><input type="submit", value="Sign In"></p>
+      <hr width="1" size="500">
 
+        <h1>Unit 2</h1>
+
+        <p>
+          Name: {{ form.name2 }}
+          {% for error in form.name2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+        </p>
+
+        <p>
+          Strength: {{ form.S2 }}
+          {% for error in form.S2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+        </p>
+
+
+
+
+
+
+      <p><input type="submit", value="Sign In"></p>
       </form>
+  <div><hr>
 
+    {{ output }}
 
   </body>
 </html>
