@@ -3,7 +3,7 @@
     <title>WFB-simulation</title>
   </head>
   <body>
-      <form action="", method="post">
+      <form action="/result", method="post">
         <p>
           Name: {{ form.name }}
           {% for error in form.name.errors %}
@@ -17,7 +17,7 @@
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
         </p>
-        <p><input type="submit", value="Simulate", name = "result"></p>
+        <p><input type="submit", value="Sign In"></p>
 
       </form>
 

@@ -6,14 +6,12 @@ from .forms import UnitForm
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = UnitForm()
-    if form.validate_on_submit():
-        flash('Unit Name = "%s", Strength = "%S"' %
-              (form.name, str(form.S)))
-        return redirect('/result')
     return render_template('index.html',
                            form = form)
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
-    print(request.form['name'])
-    print(request.form['S'])
+    print_name = request.form['name']
+    print_S = str(request.form['S'])
+    string = print_name + ", " + print_S
+    return string
