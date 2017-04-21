@@ -47,3 +47,4 @@ def wfb_simulation(unit1, unit2, runs, filename = 'results'):
 
 
     print("Finished, results printed in " + filename + ".csv")
+    return "Finished, results printed in " + filename + ".csv"
