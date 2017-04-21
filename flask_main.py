@@ -1,12 +1,11 @@
-from flask import render_template, flash, redirect, request
-from app import app
-from .forms import UnitForm
+from flask import render_template, request, Flask
+
+app = Flask(__name__)
+app.config.from_object('config')
+from forms import UnitForm
 from unit_class import Unit
 from wfb_simulation import wfb_simulation
 from read_csv import win_percent
-
-def testfun(name1, S1, name2, S2):
-    return name1 * S1 + ", " + name2 * S2
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -30,6 +29,4 @@ def index():
 
     return render_template('index.html',
                            form = form, output = output)
-
-
 
