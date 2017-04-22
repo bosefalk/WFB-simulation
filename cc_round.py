@@ -2,7 +2,7 @@ from roll_dice import *
 from compare_characteristics import *
 
 # Calculate number of wounds taken by the defender
-def cc_attack(attacker, defender, log = None):
+def cc_attack(attacker, defender, log):
 	# attacker and defender are Unit class objects
 	# log is optional logging text file
 
@@ -22,14 +22,11 @@ def cc_attack(attacker, defender, log = None):
 
 	wounds_final = wounds - saves
 
-	# If the log file isn't specified don't do any logging
-	if log != None:
-
-		log.write("Attacks: " + str(attacker.models) + '\n')
-		log.write("Hits: " + str(hits) + " (" + str(to_hit_value) + "+)" + '\n')
-		log.write("Wounds: " + str(wounds) + " (" + str(to_wound_value) + "+)" + '\n')
-		log.write("Saves: " + str(saves) + " (" + str(save_value) + "+)" + '\n')
-		log.write("Final Wounds: " + str(wounds_final) + '\n')
+	log.write("Attacks: " + str(attacker.models) + '\n')
+	log.write("Hits: " + str(hits) + " (" + str(to_hit_value) + "+)" + '\n')
+	log.write("Wounds: " + str(wounds) + " (" + str(to_wound_value) + "+)" + '\n')
+	log.write("Saves: " + str(saves) + " (" + str(save_value) + "+)" + '\n')
+	log.write("Final Wounds: " + str(wounds_final) + '\n')
 
 
 	return wounds_final;
@@ -44,7 +41,7 @@ class Return_cc_round(object):
 # Calculate a round of close combat, and update the input Unit objects with remaining number of models
 def cc_round(unit1, unit2, log):
 
-	# Write output to log.txt (and pass this open connection to cc_attack)
+	
 
 	log.write("Combat Round Starts" + '\n')
 	log.write("Number of " + str(unit1.name) + ": " + str(unit1.models) + '\n')
@@ -170,9 +167,9 @@ class Return_close_combat(object):
         self.round = round
 
 # Continues the combat by iterating cc_round until one units fails a break test or is wiped out
-def close_combat(unit1, unit2):
+def close_combat(unit1, unit2, log):
 
-	log = open("log.txt", "w+")
+	
 	cont = True
 	round = 0
 
@@ -189,12 +186,12 @@ def close_combat(unit1, unit2):
 	winner = cc_result.winner
 
 	if winner == None:
-		log.write("Both units were wiped out")
-		log.close
+		log.write("Both units were wiped out" + '\n' + '\n' + '\n')
+		
 		return Return_close_combat(winner = None, round = round)
 
-	log.write(str(winner.name) + " won the battle")
-	log.close
+	log.write(str(winner.name) + " won the battle" + '\n' + '\n' + '\n')
+	
 
 	return Return_close_combat(winner = winner, round = round)
 
