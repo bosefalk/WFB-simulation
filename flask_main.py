@@ -1,4 +1,4 @@
-from flask import render_template, request, Flask
+from flask import render_template, request, Flask, send_file
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -30,3 +30,6 @@ def index():
     return render_template('index.html',
                            form = form, output = output)
 
+@app.route('/results.csv')
+def results():
+    return send_file('results.csv')
