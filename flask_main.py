@@ -33,3 +33,7 @@ def index():
 @app.route('/results.csv')
 def results():
     return send_file('results.csv')
+
+@app.route('/log.txt')
+def log():
+    return send_file('log.txt', as_attachment=True)
