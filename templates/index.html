@@ -30,7 +30,7 @@
           </tr>
 
           <tr>
-            <td>Models</td>
+            <td>Number of models</td>
             <td>{{ form.models1 }}
               {% for error in form.models1.errors %}
               <span style="color: red;">[{{ error }}]</span>
@@ -115,7 +115,7 @@
 
 
       <p>
-        Number of runs: {{ form.runs }}
+        Number of simulation runs: {{ form.runs }}
           {% for error in form.Ld2.errors %}
               <span style="color: red;">[{{ error }}]</span>
               {% endfor %}<br>
@@ -126,5 +126,12 @@
 
     {{ output }}
 
+    <p>
+      <a href="/results.csv" download>Download results</a>
+    </p>
+
+    <p>
+      <a href="/log.txt" download>Download detailed log</a>
+    </p>
   </body>
 </html>
